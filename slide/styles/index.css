@@ -1,0 +1,343 @@
+/* ------------------------------------------------------------------
+   Agent Skills in Action — design tokens
+   Paper + ink, with one colour per actor:
+     user = amber · agent = teal · model = indigo · skill file = clay
+   ------------------------------------------------------------------ */
+:root {
+  --paper: #faf7f2;
+  --paper-2: #f3eee5;
+  --ink: #1f2430;
+  --muted: #646a7a;
+  --line: #e2dbcf;
+
+  --clay: #d9714b;
+  --clay-ink: #a84a28;
+  --clay-soft: #f8e4da;
+
+  --teal: #2a9d8f;
+  --teal-ink: #1b6e64;
+  --teal-soft: #d8efeb;
+
+  --indigo: #5160d6;
+  --indigo-ink: #3440a8;
+  --indigo-soft: #e3e5fb;
+
+  --amber: #e3a133;
+  --amber-ink: #8f5f0c;
+  --amber-soft: #fbecd2;
+
+  --rose: #cf4a5c;
+  --rose-ink: #9d2b3b;
+  --rose-soft: #f9dde1;
+
+  --green: #3f9b5a;
+  --green-soft: #dcf0e1;
+
+  --surface: #ffffff;
+  --highlight: #fff6c2;
+  --highlight-soft: #fff6dc;
+  --green-ink: #2e6e40;
+  --neutral-bar: #c9c2b6;
+  --terminal: #1f2430;
+
+  --shadow: 0 1px 0 rgba(31, 36, 48, 0.04), 0 8px 24px -12px rgba(31, 36, 48, 0.25);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark mode (colorSchema: auto follows the viewer's system setting,
+   or toggle it from the Slidev nav bar). Same roles, night palette. */
+html.dark {
+  --paper: #15171c;
+  --paper-2: #20232b;
+  --surface: #1c1f26;
+  --ink: #ece8e1;
+  --muted: #a0a5b2;
+  --line: #333845;
+
+  --clay: #e07f5a;
+  --clay-ink: #f3a684;
+  --clay-soft: #3a2620;
+
+  --teal: #33b3a3;
+  --teal-ink: #74d5c7;
+  --teal-soft: #15302c;
+
+  --indigo: #6c79e8;
+  --indigo-ink: #aab3ff;
+  --indigo-soft: #23274a;
+
+  --amber: #e8aa3e;
+  --amber-ink: #f4c977;
+  --amber-soft: #382d16;
+
+  --rose: #e05a6d;
+  --rose-ink: #f39ba8;
+  --rose-soft: #3a1d24;
+
+  --green: #55b872;
+  --green-soft: #1a3323;
+  --green-ink: #8fd9a5;
+
+  --highlight: #4a3f15;
+  --highlight-soft: #3d3418;
+  --neutral-bar: #4a4f5c;
+  --terminal: #0c0e12;
+
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 10px 26px -12px rgba(0, 0, 0, 0.7);
+}
+
+.slidev-layout {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans Thai', 'IBM Plex Sans', system-ui, sans-serif;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3 {
+  font-family: 'Space Grotesk', 'IBM Plex Sans Thai', sans-serif;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.slidev-layout h1 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+
+.slidev-layout h1 + p {
+  opacity: 1;
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.slidev-layout p,
+.slidev-layout li {
+  line-height: 1.5;
+}
+
+.slidev-layout code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+.slidev-layout :not(pre) > code {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 0.05em 0.35em;
+  font-size: 0.88em;
+  color: var(--clay-ink);
+}
+
+.slidev-layout pre,
+.slidev-code {
+  border-radius: 12px !important;
+  border: 1px solid var(--line);
+  font-size: 0.82rem !important;
+  line-height: 1.55 !important;
+}
+
+/* Eyebrow label above titles */
+.eyebrow {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay-ink);
+  background: var(--clay-soft);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  margin-bottom: 0.6rem;
+}
+
+.eyebrow.teal { color: var(--teal-ink); background: var(--teal-soft); }
+.eyebrow.indigo { color: var(--indigo-ink); background: var(--indigo-soft); }
+.eyebrow.amber { color: var(--amber-ink); background: var(--amber-soft); }
+
+/* Generic card */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 0.9rem 1rem;
+}
+
+/* Callout line under a slide */
+.takeaway {
+  border-left: 4px solid var(--clay);
+  background: var(--surface);
+  padding: 0.6rem 0.9rem;
+  border-radius: 0 10px 10px 0;
+  box-shadow: var(--shadow);
+  font-size: 0.95rem;
+}
+
+/* Tables */
+.slidev-layout table {
+  font-size: 0.78rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.slidev-layout th {
+  background: var(--paper-2);
+  font-family: 'Space Grotesk', sans-serif;
+  text-align: left;
+}
+.slidev-layout th,
+.slidev-layout td {
+  padding: 0.42rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+.slidev-layout tr:last-child td { border-bottom: none; }
+
+/* Slidev v-click default: soften into a fade + rise */
+.slidev-vclick-target {
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.slidev-vclick-hidden {
+  transform: translateY(8px);
+}
+
+/* Section divider layout tweaks */
+.section-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 7rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--clay);
+  opacity: 0.9;
+}
+
+/* Headings that contain inline code */
+.slidev-layout h1 code {
+  font-size: 0.86em;
+  background: var(--clay-soft) !important;
+  border: none !important;
+  padding: 0 0.25em !important;
+}
+
+/* Let grid columns shrink so code blocks don't push neighbours off the slide */
+.slidev-layout .grid > * { min-width: 0; }
+
+/* Wrap long code lines instead of clipping them */
+.slidev-layout .slidev-code code { white-space: pre-wrap; word-break: break-word; }
+
+.slidev-layout h3 { font-weight: 700; font-size: 1.15rem; margin-bottom: 0.4rem; }
+
+/* Numbered side-steps next to a code block */
+.steps { display: flex; flex-direction: column; gap: 14px; font-size: 15px; line-height: 1.45; }
+.steps b, .steps .e {
+  display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 8px;
+  background: var(--amber); color: white; font: 700 12px 'Space Grotesk'; margin-right: 8px;
+  vertical-align: middle;
+}
+.steps .e { background: var(--paper-2); font-size: 15px; }
+.steps .g { color: var(--clay-ink); font-weight: 700; }
+.steps .path { font: 600 12.5px 'JetBrains Mono', monospace; color: var(--muted); margin-top: 6px; }
+
+/* ------------------------------------------------------------------
+   Copy buttons (v-copy, see setup/copy.ts)
+   Invisible until you hover the element, so slides look unchanged.
+   ------------------------------------------------------------------ */
+.copy-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 20;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  transition: opacity 0.18s, transform 0.18s, color 0.18s, border-color 0.18s;
+}
+.has-copy:hover > .copy-btn,
+.copy-btn:focus-visible,
+.copy-btn.done,
+.copy-btn.fail {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.copy-btn:hover { color: var(--clay-ink); border-color: var(--clay); }
+.copy-btn.done { color: var(--green); border-color: var(--green); }
+.copy-btn.fail { color: var(--rose); border-color: var(--rose); }
+/* Table cells: sit inside the cell, vertically centred */
+td.has-copy > .copy-btn { top: 50%; right: 6px; margin-top: -13px; }
+/* Don't print / export the buttons */
+@media print { .copy-btn { display: none !important; } }
+/* Receipt (Demo 1): its zig-zag edge is a CSS mask, so keep the button inside */
+.receipt.has-copy > .copy-btn { top: 6px; right: 6px; }
+
+/* ------------------------------------------------------------------
+   Benchmark tables (slides 40–41), redrawn from skill-creator's
+   review page so they stay sharp at any size.
+   ------------------------------------------------------------------ */
+.bench {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 16px 14px;
+  box-shadow: var(--shadow);
+}
+.bench-title { font: 700 18px 'Space Grotesk', sans-serif; margin-bottom: 2px; }
+.bench-meta { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.bench-meta b { color: var(--ink); }
+.slidev-layout .bench table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 14px;
+  box-shadow: none;
+}
+.slidev-layout .bench th {
+  background: #151515;
+  color: #fff;
+  font: 600 10.5px 'JetBrains Mono', monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border: none;
+}
+html.dark .slidev-layout .bench th { background: #0c0e12; }
+.slidev-layout .bench td {
+  padding: 8px 12px;
+  border-top: 1px solid var(--line);
+  border-bottom: none;
+  font-variant-numeric: tabular-nums;
+  background: var(--surface);
+}
+.slidev-layout .bench td:first-child { font-weight: 700; }
+.bench .pos { color: var(--green-ink); font-weight: 700; }
+.bench .ok { color: var(--green); font-weight: 700; font-size: 16px; }
+.bench .no { color: var(--rose); font-weight: 700; font-size: 16px; }
+.bench-split { display: grid; grid-template-columns: 1.35fr 1fr; gap: 16px; align-items: start; }
+.slidev-layout .bench-split td:first-child { font-weight: 500; }
+.bench-eval { font: 600 12px 'JetBrains Mono', monospace; color: var(--muted); margin-bottom: 8px; }
+.bench-eval b { color: var(--ink); font-family: 'Space Grotesk', sans-serif; font-size: 15px; }
+.bench-eval span { display: block; font-size: 11px; margin-top: 2px; }
+.bench-notes { border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; background: var(--paper-2); }
+.bench-notes-title { font: 700 13px 'Space Grotesk', sans-serif; margin-bottom: 4px; }
+.bench-notes ul { margin: 0; padding-left: 16px; }
+.bench-notes li { font-size: 11.5px; line-height: 1.45; margin: 2px 0; }
