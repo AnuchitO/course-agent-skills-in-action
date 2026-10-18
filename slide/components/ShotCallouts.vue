@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useSlideContext } from '@slidev/client'
+import { asset } from '../utils/asset'
 
 /**
  * A real screenshot with numbered callouts.
@@ -39,7 +40,7 @@ const size = computed(() => {
 <template>
   <div class="sc">
     <div class="shot" :style="size">
-      <img :src="src" alt="">
+      <img :src="asset(src)" alt="">
       <template v-for="(co, i) in props.callouts" :key="i">
         <span
           class="box"

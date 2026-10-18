@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useSlideContext } from '@slidev/client'
+import { asset } from '../utils/asset'
 
 /**
  * Step-by-step "install a skill in the Claude app".
@@ -66,7 +67,7 @@ function fit(s: Step) {
         <template v-for="(s, i) in props.steps" :key="i">
           <div class="shot" :class="{ on: i === current }">
             <div v-if="s.img" class="frame" :style="fit(s)">
-              <img :src="s.img" :alt="s.title">
+              <img :src="asset(s.img)" :alt="s.title">
               <span
                 v-for="(r, j) in s.rings ?? []"
                 :key="j"
