@@ -383,6 +383,10 @@ Capture the meaning with emoji alone.
 
 </div>
 
+<Challenge v-click="6" class="mt-5" lab="Lab 0" done="“Emoji mode please: how was your weekend?” gets an emoji-only reply in a fresh chat.">
+  Make emoji mode switch on <b>by itself</b> in a brand-new chat. No pasting.
+</Challenge>
+
 
 <!--
 Point out: the body is literally the prompt from Act 1. Nothing new to learn — just a new place to put it.
@@ -643,6 +647,32 @@ Do this live on the projector while everyone follows on their own laptop. One cl
 
 ---
 
+<div class="eyebrow amber">Lab 0 · test kit</div>
+
+# Test your `emoji-only` skill
+
+<p class="kit-sub">Hover a box to copy it. Paste into a <b>new chat</b>, then compare with <b>Expected</b>.</p>
+
+<TestKit class="mt-3" :cols="4" :tests="[
+  { input: 'Emoji mode please: how was your weekend?', expect: 'Emoji only: no words, letters or numbers.', tone: 'ok' },
+  { input: 'Emoji mode: explain what a skill is.', expect: 'Emoji only, even for a “wordy” question.', tone: 'ok' },
+  { input: 'Emoji mode: what should I eat tonight?', expect: 'Emoji only. Ask it in a brand-new chat: still works, nothing pasted.', tone: 'ok', note: 'new chat' },
+  { input: 'What is the capital of France?', expect: 'A normal answer in words. No “emoji” in the prompt, so the skill does not load.', tone: 'info', note: 'control' },
+]" />
+
+<div class="takeaway mt-5 text-sm">Test 4 is the control: a skill loads only when the request matches its <code>description</code>.</div>
+
+<style>
+.kit-sub { color: var(--muted); margin-top: -0.2rem; }
+</style>
+
+<!--
+Tests 1–3 should come back as emoji only. Test 4 should come back in words — that's the point: the description decides when the skill loads.
+If test 1 fails: is the skill switched on? Is it a NEW chat? Does the frontmatter start on line 1?
+-->
+
+---
+
 <div class="eyebrow amber">Lab 0 · checkpoint</div>
 
 # Will it trigger? 🤔
@@ -697,6 +727,10 @@ class: text-center
 </div>
 
 </div>
+
+<Challenge v-click="4" class="mt-6" lab="Lab 1" done="All 4 test claims get the right verdict, name the rule they break, and give the right total.">
+  Make Claude check a claim against <b>your</b> company's rules, not its guesses.
+</Challenge>
 
 ---
 
@@ -805,6 +839,31 @@ The "change a rule" exercise is the moment it clicks: the policy lives in a file
 -->
 
 ---
+
+<div class="eyebrow">Lab 1 · test kit</div>
+
+# Test receipts for `expense-check`
+
+<p class="kit-sub">Hover a receipt to copy it. Paste it into Claude, then check the verdict, the rule numbers and the total.</p>
+
+<TestKit class="mt-3" :cols="4" receipt :tests="[
+  { input: 'Will this be reimbursed?\nClient dinner, 2 people\nDate: 3 days ago\n- Food: 1,600 baht\n- Wine x 2: 400 baht\nTotal: 2,000 baht\nNo receipt attached.', expect: '⚠️ Needs fixing. Wine is not allowed (rule 2); over 1,000 needs a receipt (rule 3). Pays 1,600 ฿ once the receipt is attached.', tone: 'warn' },
+  { input: 'Can I claim this?\nGrab to client office\nDate: last week\nFare: 180 baht\nReceipt attached.', expect: '✅ OK to submit. No issues found. Pays 180 ฿.', tone: 'ok' },
+  { input: 'Can I claim this?\nRental car, 2 days\nDate: yesterday\nTotal: 3,500 baht\nReceipt attached.\nManager approval: none', expect: '⚠️ Needs fixing. Rental cars need manager approval (rule 4).', tone: 'warn' },
+  { input: 'Can I claim this?\nTeam lunch, 5 people\nDate: 45 days ago\nTotal: 4,500 baht\nReceipt attached.', expect: '❌ Will be rejected. 900/person is over 800 (rule 1); older than 30 days (rule 5).', tone: 'bad' },
+]" />
+
+<style>
+.kit-sub { color: var(--muted); margin-top: -0.2rem; }
+</style>
+
+<!--
+Every reply should have the same three sections: Verdict, Flags (with rule numbers), Reimbursable total.
+Dates are relative ("3 days ago", "45 days ago") so the 30-day rule gives the same result whatever day you run the workshop.
+Team lunch: 4,500 / 5 = 900 per person > 800.
+-->
+
+---
 layout: center
 class: text-center
 ---
@@ -816,7 +875,7 @@ class: text-center
 <p style="color:var(--muted);font-size:1.1rem">Demo 2 · <code>delivery-fee</code> — when the answer must be <b>exact</b></p>
 
 ---
-clicks: 4
+clicks: 5
 ---
 
 <div class="eyebrow rose" style="color:var(--rose-ink);background:var(--rose-soft)">Demo 2 · the problem</div>
@@ -839,6 +898,10 @@ clicks: 4
 </div>
 
 </div>
+
+<Challenge v-click="5" class="mt-6" lab="Lab 2" done="300 ฿ · 12.5 km · Tuesday gives 107 ฿ twice in a row, and the fee changes only when you edit the script.">
+  Make Claude quote the <b>exact</b> delivery fee, every time.
+</Challenge>
 
 <style>
 .rules { display: flex; flex-direction: column; gap: 12px; font-size: 16px; border-top: 5px solid var(--rose); }
@@ -1026,6 +1089,38 @@ python3 scripts/calc_fee.py --km 12.5 \
 </style>
 
 ---
+
+<div class="eyebrow">Lab 2 · test kit</div>
+
+# Test prompts for `delivery-fee`
+
+<p class="kit-sub">Hover a box to copy it. Check the fee, and check that Claude <b>ran the script</b> instead of doing the math itself.</p>
+
+<TestKit class="mt-3" :cols="4" :tests="[
+  { input: 'How much is delivery for a 300 baht order, 12.5 km away, on Tuesday?', expect: '107 ฿. Ask it twice: same number both times.', tone: 'ok', note: 'ask twice' },
+  { input: 'How much is delivery for a 600 baht order, 12.5 km away, on Tuesday?', expect: 'Free (0 ฿): the order is over 500 ฿.', tone: 'ok' },
+  { input: 'Can you deliver a 100 baht order 2 km away on Sunday?', expect: 'No. No delivery on Sundays; it suggests Monday.', tone: 'bad' },
+  { input: 'How much is delivery?', expect: 'No number yet. It asks for the distance, the order total and the day.', tone: 'info' },
+]" />
+
+<div class="cli card mt-4">
+  <b>Script check:</b>
+  <code v-copy>python3 scripts/calc_fee.py --km 12.5 --order 300 --day Tue</code>
+  <span>→ <code>fee=107 baht</code></span>
+</div>
+
+<style>
+.kit-sub { color: var(--muted); margin-top: -0.2rem; }
+.cli { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 13px; padding: 0.6rem 0.9rem; }
+.cli > code { position: relative; }
+</style>
+
+<!--
+12.5 km: 40 + (12.5 − 3) × 7 = 106.5 → rounded up to 107.
+After changing PER_KM to 10, test 1 becomes 40 + 9.5 × 10 = 135 baht.
+-->
+
+---
 layout: center
 class: text-center
 ---
@@ -1040,8 +1135,13 @@ class: text-center
   <span v-copy="'https://github.com/anthropics/skills/tree/main/skills/skill-creator'">https://github.com/anthropics/skills/tree/main/skills/skill-creator</span>
 </div>
 
+<Challenge v-click="1" class="challenge-c" lab="Lab 3" done="Its test prompts pass, and the benchmark shows it beats answering with no skill.">
+  Let Claude build a skill for a rule <b>your team</b> keeps asking about.
+</Challenge>
+
 <style>
 .official-link { margin-top: 1.4rem; }
+.challenge-c { max-width: 720px; margin: 1.6rem auto 0; }
 .official-link span {
   display: inline-block;
   font: 500 12px 'JetBrains Mono', monospace;
@@ -1624,6 +1724,29 @@ Add a rule: hotel max 2,500 baht/night.
 
 <!--
 Good first skills: something with private rules (like Demo 1) — that's where the with/without comparison shows the clearest difference.
+-->
+
+---
+
+<div class="eyebrow">Lab 3 · test kit</div>
+
+# Prompts for skill-creator
+
+<p class="kit-sub">Hover a box to copy it. Test 3 checks the rule that skill-creator added in test 2.</p>
+
+<TestKit class="mt-3" :cols="3" :tests="[
+  { input: 'Use skill-creator to make a skill that checks a leave request against our leave policy:\n1. Max 10 days of annual leave a year.\n2. Request at least 7 days ahead.\n3. No leave in the last week of a quarter.', expect: 'It interviews you first, then drafts a leave-check SKILL.md and 2–3 test prompts for you to approve.', tone: 'info', note: 'new skill' },
+  { input: 'Use skill-creator to improve demos/demo-1/expense-check.\nAdd a rule: hotel max 2,500 baht per night.', expect: 'A new hotel rule in SKILL.md. In Claude Code it also runs old vs new on the same tests and shows the difference.', tone: 'info', note: 'improve' },
+  { input: 'Can I claim this?\nHotel in Chiang Mai, 2 nights\nDate: yesterday\nTotal: 6,000 baht\nReceipt attached.', expect: '⚠️ Needs fixing. 3,000/night is over the 2,500 hotel cap. Pays 5,000 ฿.', tone: 'warn', note: 'after test 2' },
+]" />
+
+<style>
+.kit-sub { color: var(--muted); margin-top: -0.2rem; }
+</style>
+
+<!--
+Test 1 is a fresh skill from scratch: let them answer the interview with their own team's rules if they have one.
+Test 3 only passes once the improved expense-check is installed: 6,000 / 2 nights = 3,000 per night; 2 × 2,500 = 5,000 reimbursable.
 -->
 
 ---
