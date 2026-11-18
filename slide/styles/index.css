@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------
-   Agent Skills in Action — design tokens
+   AI Agent Skill Creation — design tokens
    Paper + ink, with one colour per actor:
      user = amber · agent = teal · model = indigo · skill file = clay
    ------------------------------------------------------------------ */
@@ -341,3 +341,12 @@ html.dark .slidev-layout .bench th { background: #0c0e12; }
 .bench-notes-title { font: 700 13px 'Space Grotesk', sans-serif; margin-bottom: 4px; }
 .bench-notes ul { margin: 0; padding-left: 16px; }
 .bench-notes li { font-size: 11.5px; line-height: 1.45; margin: 2px 0; }
+
+/* PDF export: Chromium rasterizes large blurred box-shadows as flat gray boxes.
+   Drop shadows in print; the borders keep the cards readable. */
+@media print {
+  *, *::before, *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}

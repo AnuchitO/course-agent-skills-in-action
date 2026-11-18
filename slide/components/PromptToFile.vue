@@ -2,10 +2,10 @@
 import { computed } from 'vue'
 import { useSlideContext } from '@slidev/client'
 
-// click 0: three copy-pasted prompts scattered
-// click 1: they fold into one SKILL.md file — body only (the prompt itself)
-// click 2: the frontmatter slides in on top, pushing the body down
-// click 3: the file feeds every new chat automatically
+// clicks 1–3: the pasted prompts appear one by one
+// click 4: they fold into one SKILL.md file — body only (the prompt itself)
+// click 5: the frontmatter slides in on top, pushing the body down
+// click 6: the file feeds every new chat automatically
 const { $clicks } = useSlideContext()
 const c = computed(() => Number($clicks.value ?? 0))
 
@@ -16,12 +16,12 @@ description: Reply using only emoji, no words. Use when the user asks for emoji-
 const BODY = `Reply to everything using only emoji — no words, no letters, no numbers.
 Capture the meaning with emoji alone.`
 // What the copy button copies: exactly what the file shows at this step
-const copyText = computed(() => (c.value >= 2 ? `${FRONTMATTER}\n\n${BODY}\n` : `${BODY}\n`))
+const copyText = computed(() => (c.value >= 5 ? `${FRONTMATTER}\n\n${BODY}\n` : `${BODY}\n`))
 
 const slips = [
-  { x: -150, y: -60, r: -7 },
-  { x: 20, y: -10, r: 4 },
-  { x: -80, y: 55, r: -2 },
+  { x: -90, y: -105, r: -3 },
+  { x: 10, y: 0, r: 2 },
+  { x: -50, y: 105, r: -1.5 },
 ]
 </script>
 
@@ -33,26 +33,28 @@ const slips = [
       :key="i"
       class="slip"
       :style="{
-        transform: c >= 1
+        transform: c >= 4
           ? `translate(-50%, -50%) translate(-210px, 0px) rotate(0deg) scale(0.4)`
-          : `translate(-50%, -50%) translate(${s.x - 60}px, ${s.y}px) rotate(${s.r}deg)`,
-        opacity: c >= 1 ? 0 : 1,
-        transitionDelay: `${i * 70}ms`,
+          : c >= i + 1
+            ? `translate(-50%, -50%) translate(${s.x - 60}px, ${s.y}px) rotate(${s.r}deg)`
+            : `translate(-50%, -50%) translate(${s.x - 60}px, ${s.y + 24}px) rotate(${s.r}deg) scale(0.92)`,
+        opacity: c >= 4 || c < i + 1 ? 0 : 1,
+        transitionDelay: c >= 4 ? `${i * 70}ms` : '0ms',
       }"
     >
       <span class="slip-tag">copy · paste #{{ i + 1 }}</span>
-      Reply to everything using only emoji — no words.
+      Reply to everything using only emoji — no words, no letters, no numbers.<br />Capture the meaning with emoji alone.
     </div>
 
     <!-- the file -->
     <!-- Labels sit OUTSIDE the file (left-hand brackets) so nobody mistakes them for file content -->
-    <div v-copy="copyText" class="file" :class="{ on: c >= 1 }">
+    <div v-copy="copyText" class="file" :class="{ on: c >= 4 }">
       <div class="file-tab">emoji-only/SKILL.md</div>
       <div class="sec">
-        <div class="fm-wrap" :class="{ on: c >= 2 }">
+        <div class="fm-wrap" :class="{ on: c >= 5 }">
           <pre class="fm">{{ FRONTMATTER }}</pre>
         </div>
-        <div class="side fm-side" :class="{ on: c >= 2 }" data-copy-ignore>
+        <div class="side fm-side" :class="{ on: c >= 5 }" data-copy-ignore>
           <b>frontmatter</b>
           <small>name + description</small>
         </div>
@@ -67,7 +69,7 @@ const slips = [
     </div>
 
     <!-- chats that load it -->
-    <div class="chats" :class="{ on: c >= 3 }">
+    <div class="chats" :class="{ on: c >= 6 }">
       <div v-for="n in 3" :key="n" class="chat-chip" :style="{ transitionDelay: `${n * 110}ms` }">
         <span class="line" />
         <span class="chip">chat {{ n }} <b>🙂👍</b></span>
@@ -85,12 +87,12 @@ const slips = [
 .slip {
   position: absolute;
   left: 50%; top: 50%;
-  width: 290px;
+  width: 360px;
   background: var(--clay-soft);
   border: 1.5px dashed var(--clay);
   border-radius: 12px;
   padding: 10px 14px;
-  font: 13px/1.45 'JetBrains Mono', monospace;
+  font: 11.5px/1.45 'JetBrains Mono', monospace;
   box-shadow: var(--shadow);
   transition: transform 0.8s var(--ease), opacity 0.6s var(--ease);
 }

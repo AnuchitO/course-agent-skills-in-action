@@ -134,6 +134,7 @@ const shown = (m: Msg) => clicks.value >= (m.at ?? 0)
   background: var(--paper-2);
   border-bottom-left-radius: 4px;
 }
+.bubble { white-space: pre-line; }
 .bubble.big { font-size: 26px; letter-spacing: 4px; padding: 4px 12px; }
 .bubble.bad { background: var(--rose-soft); color: var(--rose-ink); }
 .bubble.paste {

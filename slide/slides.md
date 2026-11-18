@@ -1,6 +1,6 @@
 ---
 theme: default
-title: Agent Skills in Action
+title: AI Agent Skill Creation
 info: |
   A hands-on workshop on Agent Skills and SKILL.md —
   from a reusable prompt to private knowledge to real code.
@@ -23,8 +23,8 @@ class: cover-slide
 ---
 
 <div class="cover">
-  <div class="eyebrow">Hands-on workshop · 3 hours</div>
-  <h1 class="cover-title">Agent Skills<br><span>in Action</span></h1>
+  <div class="eyebrow">Hands-on workshop · build 3 skills</div>
+  <h1 class="cover-title">AI Agent<br><span>Skill Creation</span></h1>
   <p class="cover-sub">From a prompt you keep re-pasting<br>to an AI that knows <b>your</b> rules and runs <b>your</b> code.</p>
   <div class="cover-files">
     <span>📁 emoji-only/</span><span>📁 expense-check/</span><span>📁 delivery-fee/</span>
@@ -98,14 +98,14 @@ clicks: 4
 
 A fun instruction. Nothing special yet.
 
-<div v-copy class="prompt-card">Reply to everything using only emoji — no words.</div>
+<div v-copy class="prompt-card">Reply to everything using only emoji — no words, no letters, no numbers.<br>Capture the meaning with emoji alone.</div>
 
 <div v-click="4" class="takeaway mt-6">It works! 🎉 &nbsp;…but watch what happens next.</div>
 
 </div>
 
 <ChatMock title="New chat" height="330px" :messages="[
-  { role: 'user', text: 'Reply to everything using only emoji — no words.', at: 1, copy: true },
+  { role: 'user', text: 'Reply to everything using only emoji — no words, no letters, no numbers.\nCapture the meaning with emoji alone.', at: 1, copy: true },
   { role: 'ai', text: '👍😄', at: 1, big: true },
   { role: 'user', text: 'How do I feel after three coffees?', at: 2, copy: true },
   { role: 'ai', text: '😳⚡💓🏃‍♂️', at: 3, big: true },
@@ -139,10 +139,10 @@ clicks: 5
 <ChatMock title="Later that day" height="380px" :messages="[
   { role: 'user', text: 'What should I eat tonight?', at: 0 },
   { role: 'ai', text: 'How about a bowl of khao soi? It is rich, warm and…', at: 1, bad: true },
-  { role: 'user', text: 'Reply to everything using only emoji — no words.', at: 2, paste: true },
+  { role: 'user', text: 'Reply to everything using only emoji — no words, no letters, no numbers.\nCapture the meaning with emoji alone.', at: 2, paste: true },
   { role: 'divider', text: 'new chat', at: 3 },
-  { role: 'user', text: 'Reply to everything using only emoji — no words.', at: 4, paste: true },
-  { role: 'user', text: 'Reply to everything using only emoji — no words.', at: 5, paste: true },
+  { role: 'user', text: 'Reply to everything using only emoji — no words, no letters, no numbers.\nCapture the meaning with emoji alone.', at: 4, paste: true },
+  { role: 'user', text: 'Reply to everything using only emoji — no words, no letters, no numbers.\nCapture the meaning with emoji alone.', at: 5, paste: true },
 ]" />
 
 <div class="pain">
@@ -166,7 +166,7 @@ Let the room groan. Ask: "Who has a prompt they paste every day?" Get two or thr
 -->
 
 ---
-clicks: 3
+clicks: 6
 ---
 
 <div class="eyebrow">the turn</div>
@@ -175,14 +175,34 @@ clicks: 3
 
 <PromptToFile class="mt-2" />
 
-<div v-click="3" class="takeaway">That file is called <code>SKILL.md</code>. That's all a skill is: <b>instructions Claude finds by itself</b>, when they're relevant.</div>
+<div v-click="6" class="takeaway">That file is called <code>SKILL.md</code>. That's all a skill is: <b>instructions Claude finds by itself</b>, when they're relevant.</div>
 
 <!--
-Click 1: the three pasted copies fold into a single file — just the body, the exact prompt we kept pasting.
-Click 2: add the frontmatter on top (name + description) — the body moves down. That's a complete SKILL.md.
-Click 3: every new chat picks it up automatically.
+Clicks 1–3: the pasted copies appear one by one — the pain of re-pasting.
+Click 4: they fold into a single file — just the body, the exact prompt we kept pasting.
+Click 5: add the frontmatter on top (name + description) — the body moves down. That's a complete SKILL.md.
+Click 6: every new chat picks it up automatically.
 Hover the file to copy it at either step.
 Now — and only now — say the word "skill".
+-->
+
+---
+clicks: 3
+---
+
+<div class="eyebrow">one name, many skills</div>
+
+# Every skill is a file named <span style="color:var(--clay)">SKILL.md</span>
+
+<ManySkillFiles class="mt-2" />
+
+<div v-click="3" class="takeaway">Same file name every time, so the <b>frontmatter</b> is the label: <code>name</code> + <code>description</code>.</div>
+
+<!--
+Click 0: every skill uses the exact same file name, SKILL.md. Six of them look identical.
+Click 1: "Which one is which?" Claude has the same problem when it sees a pile of skills.
+Click 2: the frontmatter (name + description) appears on each. Now they are distinguishable.
+Click 3: the description is what Claude reads to decide which skill fits the request.
 -->
 
 ---
@@ -613,7 +633,7 @@ clicks: 4
     img: '/claude-app/3-add-upload.png', w: 962, h: 360,
     rings: [{ x: 86, y: 8.3, w: 11.2, h: 9.7 }, { x: 75, y: 22.8, w: 21.6, h: 9.2 }] },
   { title: 'Upload SKILL.md', where: 'demos/demo-0/emoji-only/SKILL.md',
-    detail: 'Drop the file (or a .zip of the folder), then click Upload. A security scan runs first.',
+    detail: 'Drop the file, or a .zip of the folder if it has scripts (zip -r name.zip name). Then click Upload. A security scan runs first.',
     img: '/claude-app/4-upload-dialog.png', w: 962, h: 560,
     rings: [{ x: 2.6, y: 33, w: 93.2, h: 25.5 }, { x: 2.7, y: 90.5, w: 8.7, h: 6.6 }] },
   { title: 'Try it in a new chat', where: 'hover the prompt to copy it',
@@ -1044,7 +1064,7 @@ Walk it slowly — this is the slide that makes the whole workshop click for eng
 
 # Install `delivery-fee` and break it
 
-<div class="grid grid-cols-[1fr_1.1fr] gap-6 mt-3">
+<div class="grid grid-cols-[1fr_1.1fr] gap-5 mt-1">
 
 <div>
 
@@ -1056,7 +1076,16 @@ python3 scripts/calc_fee.py --km 12.5 \
   --order 300 --day Tue   # fee=107 baht
 ```
 
-<p class="text-xs" style="color:var(--muted)">Needs somewhere Claude can run code — Claude Code, or the app with code execution on.</p>
+<p class="text-xs" style="color:var(--muted)">Needs Claude Code, or the app with code execution on.</p>
+
+**2 · Zip the folder, load it in Claude Desktop**
+
+```bash
+cd demos/demo-2
+zip -r delivery-fee.zip delivery-fee \
+  -x "*.DS_Store" "*/__pycache__/*"
+open .   # reveal delivery-fee.zip in Finder
+```
 
 </div>
 
@@ -1067,7 +1096,7 @@ python3 scripts/calc_fee.py --km 12.5 \
   'How much is delivery?',
 ] }">
 
-**2 · Then ask Claude**
+**3 · Then ask Claude**
 
 | Prompt | Expected |
 |---|---|
@@ -1076,16 +1105,18 @@ python3 scripts/calc_fee.py --km 12.5 \
 | 2 km on Sunday? | No — suggest Monday |
 | “How much is delivery?” | Asks for km, total, day |
 
+<div class="try mt-3 text-xs" data-copy-ignore>📦 Zip the <b>folder itself</b> (a script can't go in as one <code>.md</code>). Then <b>Settings → Customize → Skills → + Add → Upload skill</b>, pick the <code>.zip</code>, start a <b>new</b> chat.</div>
+
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+<div class="grid grid-cols-2 gap-3 mt-2 text-xs">
   <div v-click class="try">🔁 Ask the first prompt <b>twice</b>. Same number?</div>
   <div v-click v-copy="'PER_KM = 10'" class="try">✏️ Change <code>PER_KM = 7</code> → <code>10</code>. The skill text didn't change — the answer did.</div>
 </div>
 
 <style>
-.try { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; box-shadow: var(--shadow); }
+.try { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 6px 10px; box-shadow: var(--shadow); }
 </style>
 
 ---
@@ -1865,4 +1896,4 @@ class: text-center
 
 <p style="color:var(--muted);font-size:1.2rem">Questions? Let's build your first skill together.</p>
 
-<div class="mt-8" style="font: 600 13px 'JetBrains Mono', monospace; color: var(--muted)">github.com/anuchito/course-agent-skills-in-action</div>
+<div class="mt-8" style="font: 600 13px 'JetBrains Mono', monospace; color: var(--muted)">github.com/AnuchitO/sphere.academy.ai.agent.skill.creation</div>
